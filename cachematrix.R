@@ -6,7 +6,7 @@
 makeCacheMatrix <- function(x = matrix()) {
    ## Checking Invertability     
    if (ncol(x)==nrow(x) && det(x)!=0) {
-    t <- NULL
+    t <- NULL ##var for inverse
     set <- function(y) {
       x <<- y
       t <<- NULL
@@ -30,13 +30,13 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-  t <- x$getinverse()
-  if (!is.null(t)) { 
+  t <- x$getinverse() ##gets inverse
+  if (!is.null(t)) { ## checks if inverse already exists and if yes it retrives it
     message("getting cached data")
     return(t)
   }
   data <- x$get()
-  t <- solve(data, ...)
-  x$setinverse(t)
+  t <- solve(data, ...) 
+  x$setinverse(t) ##sets inverse
   t
 }
